@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsSetup", "NewsSetup\NewsSetup.csproj", "{BDBB45AB-5801-4E53-9EB2-7C465979EE97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDBB45AB-5801-4E53-9EB2-7C465979EE97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDBB45AB-5801-4E53-9EB2-7C465979EE97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDBB45AB-5801-4E53-9EB2-7C465979EE97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDBB45AB-5801-4E53-9EB2-7C465979EE97}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
