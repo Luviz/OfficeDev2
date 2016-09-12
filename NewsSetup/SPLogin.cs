@@ -32,7 +32,7 @@ namespace NewsSetup {
                 Console.WriteLine("Your site title is: " + context.Web.Title);
                 //Console.ForegroundColor = defaultForeground;
             }
-
+            
         }
 
         private SecureString MakePassSecureAgen(string pass) {
