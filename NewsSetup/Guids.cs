@@ -17,6 +17,8 @@ namespace NewsSetup {
             //Title - inherted
             //Ingress
             public const string INGRESS     = "{F529FF7D-6DE9-4DA6-BEB9-741FB80BD95C}";
+            //Image Publishing Image
+            public const string IMG         = "{77E37F68-D329-4879-9706-2D41157442B4}";
             //Author
             public const string AUTHOR      = "{A3937500-F5D9-454D-AF81-6F880DD97EF0}";
             //Content publishing html
@@ -27,8 +29,6 @@ namespace NewsSetup {
             public const string DEPARTMANT  = "{48B1C174-F857-464F-8969-D99AF32DA236}";
             //Keyword Taxonomy
             public const string KEYWORDS    = "{7155209B-B7CB-47F7-8A8E-22BDCA9ED5BB}";
-            //Image Publishing Image
-            public const string IMG         = "{77E37F68-D329-4879-9706-2D41157442B4}";
         }
     }
 }

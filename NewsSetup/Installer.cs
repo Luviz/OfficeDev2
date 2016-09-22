@@ -6,82 +6,90 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace NewsSetup {
-    public class Installer {
+	public class Installer {
+		const string GROUPNAME = "OfficeDev2";
+		public Installer(ClientContext ctx) {
+			Console.WriteLine("NewsSetup ...");
+			//Build ct 
+			var newsCT = BuildContentType(ctx);
+			//Build site Columns
+			BuildSiteColumns(ctx, "SiteColumns.json");
+			//connect sc to ct
+			ConntectSiteCloumnsToCT(ctx, newsCT);
+			Console.WriteLine("NewsSetup DONE!!");
+		}
 
-        const string GROUPNAME = "OfficeDev2";
+		internal ContentType BuildContentType(ClientContext ctx) {
+			if (!ctx.Web.ContentTypeExistsById(Guids.ContentTypes.GetNews_CT_Guid())) {
+				Console.Write("Creataing ContentType ...");
+				ContentTypeCreationInformation ctci = new ContentTypeCreationInformation();
+				ctci.Name = "OD2_ct_NewsPage";
+				ctci.Group = GROUPNAME;
+				ctci.Id = Guids.ContentTypes.GetNews_CT_Guid();
+				ctci.Description = "News Page for Office Dev 2 Assinment";
 
-        public Installer(ClientContext ctx) {
-            //Build ct 
-            //Build site Columns
-            //connect sc to ct
-        }
+				var NewsPages = ctx.Web.ContentTypes.Add(ctci);
+				ctx.Web.Update();
+				ctx.ExecuteQuery();
+				Console.WriteLine("DONE!");
+				return NewsPages;
+			}
+			else {
+				Console.WriteLine("ContentTpye Exists");
+				return ctx.Web.GetContentTypeById(Guids.ContentTypes.GetNews_CT_Guid());
+			}
+		}
 
-        internal ContentType BuildContentType(ClientContext ctx) {
-            if (!ctx.Web.ContentTypeExistsById(Guids.ContentTypes.GetNews_CT_Guid())) {
-                ContentTypeCreationInformation ctci = new ContentTypeCreationInformation();
-                ctci.Name = "OD2_ct_NewsPage";
-                ctci.Group = GROUPNAME;
-                ctci.Id = Guids.ContentTypes.GetNews_CT_Guid();
-                ctci.Description = "News Page for Office Dev 2 Assinment";
+		private void BuildSiteColumns(ClientContext ctx, string pathOfJson) {
+			Console.Write("Working on SiteColumns ...");
+			var Fields = GetFieldCreationInformationFromJson(pathOfJson);
+			Fields.ForEach(f => {
+				if (!ctx.Web.FieldExistsById(f.Id))
+					ctx.Web.CreateField(f);
+			});
+			Console.WriteLine("DONE!");
+		}
 
-                var NewsPages = ctx.Web.ContentTypes.Add(ctci);
+		private void ConntectSiteCloumnsToCT(ClientContext ctx, ContentType ct) {
+			Console.Write("Conecting SiteColumns to ContentType...");
+			ct.AddFieldById(Guids.SiteColumns.INGRESS);
+			ct.AddFieldById(Guids.SiteColumns.IMG);
+			ct.AddFieldById(Guids.SiteColumns.AUTHOR);
+			ct.AddFieldById(Guids.SiteColumns.CONTENT);
+			ct.AddFieldById(Guids.SiteColumns.ARTICLE_DATE);
+			Console.WriteLine("DONE!");
+			ct.Update(true);
+			ctx.ExecuteQuery();
+		}
 
-                return NewsPages;
-            }
-            else {
-                return ctx.Web.GetContentTypeById(Guids.ContentTypes.GetNews_CT_Guid());
-            }
-        }
+		private static List<FieldCreationInformation> GetFieldCreationInformationFromJson(string path) {
+			List<FieldCreationInformation> lfci;
+			using (StreamReader sr = new StreamReader(path)) {
+				string json = sr.ReadToEnd();
+				List<SColumns> scs = JsonConvert.DeserializeObject<List<SColumns>>(json);
+				lfci = new List<FieldCreationInformation>();
+				scs.ForEach(sc => {
+					lfci.Add(new FieldCreationInformation((FieldType)sc.Type) {
+						DisplayName = sc.DisplayName,
+						InternalName = sc.InternalName,
+						Id = sc.Guid,
+						Group = sc.Group
+					});
+				});
+			}
+			return lfci;
+		}
 
-        //setup site Columns 
-        private List<SiteColumns> SetupSiteColmns() {
-            List<SiteColumns> ret = new List<SiteColumns>();
-            //Ingrees
-            ret.Add(new SiteColumns {
-                DispName = "Ingress",
-                InteName = "ingress",
-                GroupName = GROUPNAME,
-                Type = FieldType.Text,
-                Guid = Guids.SiteColumns.INGRESS
-            });
-            //Image 
-            ret.Add(new SiteColumns {
-                DispName = "Publishing Image",
-                InteName = "pubimg",
-                GroupName = GROUPNAME,
-                Type = FieldType.URL,
-                Guid = Guids.SiteColumns.IMG
-            });
-            //Author
-            ret.Add(new SiteColumns {
-                DispName = "Author",
-                InteName = "author",
-                GroupName = GROUPNAME,
-                Type = FieldType.Text,
-                Guid = Guids.SiteColumns.AUTHOR
-            });
-            //Content
-            ret.Add(new SiteColumns {
-                DispName = "Content",
-                InteName = "conten",
-                GroupName = GROUPNAME,
-                Type = FieldType.Text, //have to be RichText
-                Guid = Guids.SiteColumns.CONTENT
-            });
-            //Aricle Date
-            ret.Add(new SiteColumns {
-                DispName = "Aritcle Date",
-                InteName = "ariticledate",
-                GroupName = GROUPNAME,
-                Type = FieldType.DateTime,
-                Guid = Guids.SiteColumns.ARTICLE_DATE
-            });
-
-            return ret;
-        }
-
-
-    }
+		private class SColumns {
+			public Guid Guid { get; set; }
+			public string DisplayName { get; set; }
+			public string InternalName { get; set; }
+			public int Type { get; set; }
+			public string Group { get; set; }
+		}
+	}
 }

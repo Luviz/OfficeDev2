@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.SharePoint.Client;
+using NewsSetup;
 
 namespace Installer {
 	class Program {
 		static void Main(string[] args) {
 			using (ClientContext ctx = GetAppOnlyCtx(new Uri("https://luviz.sharepoint.com/sites/OfficeDev2"))) {
-				
+				//run New Setup
+				new NewsSetup.Installer(ctx); 
 			}
 			Console.ReadLine();
 		}
