@@ -4,34 +4,41 @@
     "InternalName": "ingress",
     "Group": "OfficeDev2",
     "Guid": "{F529FF7D-6DE9-4DA6-BEB9-741FB80BD95C}",
-    "Type": 2
+    "Type": 2,
+    "IsTax": "false"
   },
   {
     "DisplayName": "Publishing Image",
     "InternalName": "pubimg",
     "Group": "OfficeDev2",
     "Guid": "{77E37F68-D329-4879-9706-2D41157442B4}",
-    "Type": 11
+    "Type": 11,
+    "IsTax": "false"
   },
   {
     "DisplayName": "Author",
     "InternalName": "author",
     "Group": "OfficeDev2",
     "Guid": "{A3937500-F5D9-454D-AF81-6F880DD97EF0}",
-    "Type": 2
-  },
-  {
-    "DisplayName": "Content",
-    "InternalName": "content",
-    "Group": "OfficeDev2",
-    "Guid": "{B67DF1CC-08A7-4CF6-AE5F-3E835F8E2D8E}",
-    "Type": 2 //this has to be rich text
+    "Type": 2,
+    "IsTax": "false"
   },
   {
     "DisplayName": "Aritcle Date",
     "InternalName": "aritcledate",
     "Group": "OfficeDev2",
     "Guid": "{43340732-FF49-4E96-88D4-89D78177DDC1}",
-    "Type": 4
+    "Type": 4,
+    "IsTax": "false"
+  },
+  {
+    "DisplayName": "Department",
+    "InternalName": "department",
+    "Group": "OfficeDev2",
+    "Guid": "{48B1C174-F857-464F-8969-D99AF32DA236}",
+    "Type": 0, //TaxonomyFieldType
+    "TermSetId": "{F04CD70B-FDC5-4054-A034-106ADA653F20}",
+    "MultiValue": "False",
+    "IsTax": "True"
   }
 ]
