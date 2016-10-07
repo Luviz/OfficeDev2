@@ -28,6 +28,7 @@ namespace NewsSetup {
 			//connect sc to ct
 			ConntectSiteCloumnsToCT(newsCT);
 			Console.WriteLine("NewsSetup DONE!!");
+
 		}
 
 		internal ContentType BuildContentType() {
@@ -155,6 +156,7 @@ namespace NewsSetup {
 			Ctx.Web.Context.Load(termStore);
 			Ctx.Web.Context.Load(termSet);
 			Ctx.Web.Context.ExecuteQueryRetry();
+			
 			ret = termSet;
 			return ret;
 		}

@@ -1,0 +1,26 @@
+﻿[
+  {
+    "DisplayName": "Realtive Url",
+    "InternalName": "realtiveUrl",
+    "Group": "OfficeDev2",
+    "Guid": "{EB4EF82F-178F-402B-8F1B-751EE9A60011}",
+    "Type": 2,
+    "Required": "True"
+  },
+  {
+    "DisplayName": "LcID",
+    "InternalName": "lcid",
+    "Group": "OfficeDev2",
+    "Guid": "{7C531DF2-D6D9-4511-BC3A-7EB5AAEF5D16}",
+    "Type": 2, //TODO int
+    "Required": "True"
+  },
+  {
+    "DisplayName": "Description",
+    "InternalName": "description",
+    "Group": "OfficeDev2",
+    "Guid": "{E0F2DADF-8766-4409-B114-5BCCFA383253}",
+    "Type": 2,
+    "Required": "False"
+  }
+]

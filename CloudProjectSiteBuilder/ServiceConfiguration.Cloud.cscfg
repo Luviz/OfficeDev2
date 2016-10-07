@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="CloudProjectSiteBuilder" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
+  <Role name="ProjectSiteBuilderWithSBQueue">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=cloudprojectsitebuilder;AccountKey=L9KP6yyr1YV5l4XjeTr9yNIY465tSM3VioonHYPwVUjGixpeqcLtIJafUOY/EtSE8nP0BxCJC+cC4Z5S2hwADQ==" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://luviz-sharepoint.servicebus.windows.net;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Gsue3UCVqXJXp0sRbTAdEBXC/qGgvpKkm3JpvyBW7rc=" />
+      <Setting name="APPINSIGHTS_INSTRUMENTATIONKEY" value="d3ecf3cc-f541-4fbe-bd2b-a1fd547fd7cc" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>
